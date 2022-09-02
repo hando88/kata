@@ -21,7 +21,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 "age INT, " +
                 "primary key (id))";
         try (Connection connection = Util.getConnection()) {
-            assert connection != null;
             try (Statement statement = connection.createStatement()) {
                 statement.executeUpdate(table);
             }
@@ -33,7 +32,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         String table = "DROP TABLE IF EXISTS user";
         try (Connection connection = Util.getConnection()) {
-//            assert connection != null;
             try (Statement statement = connection.createStatement()) {
                 statement.executeUpdate(table);
             }
@@ -47,7 +45,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 "VALUES (?, ?, ?)";
 
         try (Connection connection = Util.getConnection()) {
-//            assert connection != null;
             try (PreparedStatement preparedStatement = connection.prepareStatement(table)) {
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, lastName);
@@ -63,7 +60,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void removeUserById(long id) {
         String table = "DELETE FROM user WHERE id = ?";
         try (Connection connection = Util.getConnection()) {
-//            assert connection != null;
             try (PreparedStatement preparedStatement = connection.prepareStatement(table)) {
                 preparedStatement.setLong(1, id);
                 preparedStatement.executeUpdate();
@@ -77,7 +73,6 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> userList = new ArrayList<>();
         String table = "SELECT id, name, last_name, age FROM user ";
         try (Connection connection = Util.getConnection()) {
-//            assert connection != null;
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(table)) {
                 while (resultSet.next()) {
@@ -99,7 +94,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String table = "TRUNCATE user";
         try (Connection connection = Util.getConnection()) {
-//            assert connection != null;
             try (Statement statement = connection.createStatement()) {
                 statement.executeUpdate(table);
             }
